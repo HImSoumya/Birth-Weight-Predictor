@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Baby Weight Prediction</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .form-container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 420px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+      }
+      .input-group input,
+      .input-group select {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        border-right: none;
+      }
+      .input-group span {
+        padding: 8px 10px;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-left: none;
+        border-radius: 0 5px 5px 0;
+      }
+      button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      #result {
+        margin-top: 20px;
+        background: #e6f7ff;
+        padding: 10px;
+        border-left: 4px solid #2196f3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Baby Weight Prediction</h2>
+      <form action="/predict" method="POST">
+        <label for="gestation">Gestation:</label>
+        <div class="input-group">
+          <input type="number" id="gestation" name="gestation" required />
+          <span>days</span>
+        </div>
+
+        <label for="parity">Parity:</label>
+        <div class="input-group">
+          <input type="number" id="parity" name="parity" required />
+          <span>births</span>
+        </div>
+
+        <label for="age">Mother's Age:</label>
+        <div class="input-group">
+          <input type="number" id="age" name="age" required />
+          <span>years</span>
+        </div>
+
+        <label for="height">Mother's Height:</label>
+        <div class="input-group">
+          <input type="number" id="height" name="height" required />
+          <span>inches</span>
+        </div>
+
+        <label for="weight">Mother's Weight:</label>
+        <div class="input-group">
+          <input type="number" id="weight" name="weight" required />
+          <span>lbs</span>
+        </div>
+
+        <label for="smoke">Smoking Status:</label>
+        <div class="input-group">
+          <select id="smoke" name="smoke" required>
+            <option value="">--Select--</option>
+            <option value="0">Non-Smoker</option>
+            <option value="1">Smoker</option>
+          </select>
+          <span>yes/no</span>
+        </div>
+
+        <button type="submit">Predict</button>
+
+        {% if predicted_wgt %}
+        <div id="result">
+          <strong>Predicted Baby Weight:</strong> {{ predicted_wgt }} Ounces
+        </div>
+        {% endif %}
+      </form>
+    </div>
+  </body>
+</html>
